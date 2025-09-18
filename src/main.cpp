@@ -1,18 +1,29 @@
-#include <Arduino.h>
+#include <avr/io.h>
+#include <avr/interrupt.h>
 
-// put function declarations here:
-int myFunction(int, int);
+#define F_CPU 8000000UL
 
-void setup() {
-  // put your setup code here, to run once:
-  int result = myFunction(2, 3);
+int main(void)
+{
+    while(1);
+    
+    return 0;
 }
 
-void loop() {
-  // put your main code here, to run repeatedly:
+void PWM_Init(void)
+{
+    
 }
 
-// put function definitions here:
-int myFunction(int x, int y) {
-  return x + y;
+void TIMER_Init(void)
+{
+    TCCR0A |= (1 << WGM01);
+    TCCR0B |= (1 << CS02) | (1 << CS00);
+    OCR0A = 155;
+    TIMSK0 |= (1 << OCIE0A);
+}
+
+ISR(TIMER0_COMPA_vect)
+{
+    
 }
